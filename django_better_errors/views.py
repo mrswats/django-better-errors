@@ -1,4 +1,6 @@
 from typing import Any
+from typing import Dict
+from typing import Union
 
 from rest_framework.exceptions import APIException
 from rest_framework.response import Response
@@ -13,9 +15,9 @@ class RFC9457Schema:
 
 
 def better_exception_handler(
-    exc: Exception | APIException, context: dict[str, Any]
-) -> Response | None:
-    response: Response | None = exception_handler(exc, context)
+    exc: Union[Exception, APIException], context: Dict[str, Any]
+) -> Union[Response, None]:
+    response: Union[Response, None] = exception_handler(exc, context)
 
     if response is not None:
         return Response()

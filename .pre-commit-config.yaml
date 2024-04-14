@@ -13,6 +13,8 @@ repos:
     hooks:
       - id: autoflake
         args:
+          - -i
+          - -r
           - --remove-all-unused-imports
           - --remove-duplicate-keys
   - repo: https://github.com/psf/black
@@ -23,19 +25,6 @@ repos:
     rev: v3.12.0
     hooks:
       - id: reorder-python-imports
-  - repo: https://github.com/rtts/djhtml
-    rev: 3.0.6
-    hooks:
-      - id: djhtml
-        files: .*/templates/.*\.html
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.9.0
-    hooks:
-      - id: mypy
-        language_version: "3.8"
-        args: [--ignore-missing-imports, --exclude, tests, --exclude, .venv]
-        additional_dependencies:
-          - types-Markdown
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.15.2
     hooks:
@@ -48,6 +37,15 @@ repos:
         args:
           - --target-version
           - "3.2"
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.9.0
+    hooks:
+      - id: mypy
+        language_version: "3.8"
+        args: [--ignore-missing-imports, --exclude, tests, --exclude, testing, --exclude, .venv]
+        additional_dependencies:
+          - "django-stubs[compatible-mypy]"
+          - "djangorestframework-stubs[compatible-mypy]"
   - repo: https://github.com/PyCQA/flake8
     rev: 7.0.0
     hooks:

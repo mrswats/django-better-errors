@@ -71,9 +71,8 @@ enable_error_code = [
     "truthy-bool",
 ]
 exclude = [
-   "manage.py",
-   "migrations" ,
-   "tests/",
+   "tests/*.py",
+   "testing/*.py",
 ]
 
 [tool.django-stubs]
